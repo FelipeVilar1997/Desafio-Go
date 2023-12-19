@@ -4,14 +4,12 @@ WORKDIR /usr/app
 
 COPY /golang/ .
 
-RUN go build -o /main hello.go
+RUN go build -o /app hello.go
 
 FROM scratch
 
-WORKDIR /
-
-COPY --from=builder /main /main
+COPY --from=builder /app /app
 
 EXPOSE 8080
 
-ENTRYPOINT ["/main"]
+ENTRYPOINT ["/app"]
